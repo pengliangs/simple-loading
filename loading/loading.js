@@ -20,6 +20,9 @@ layui.define('jquery',function (exports) {
             var time = opt.time;
             var className = opt.className || 'default-loading';
             var index = randomIndex();
+            if ($el.hasClass("loading")){
+                return;
+            }
             $el.addClass("loading");
             $el.append(getLoadingHtml());
 

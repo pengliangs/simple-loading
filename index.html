@@ -59,7 +59,7 @@
     <div>
         <button data-method="close" type="button" class="layui-btn">关闭第一个loading</button>
         <button data-method="closeAll" type="button" class="layui-btn">关闭所有loading</button>
-        <button data-method="show" type="button" class="layui-btn">开启一个3秒的loading</button>
+        <button data-method="reset" type="button" class="layui-btn">恢复所有loading</button>
     </div>
 
     <table class="layui-table">
@@ -128,12 +128,7 @@ layui.config({
         el: "#loading-0"
     });
 
-    for (var i = 1; i < 12; i++) {
-        loading.render({
-            el: "#loading-" + i,
-            type: i
-        });
-    }
+    restLoading();
 
     var active = {
         close: function () {
@@ -142,18 +137,25 @@ layui.config({
         , closeAll: function () {
             loading.close();
         }
-        , show: function () {
-            loading.render({time: 3000, className: "my-loading1"});
+        , reset: function () {
+            restLoading();
         }
     }
 
+    function restLoading(){
+        for (var i = 1; i < 12; i++) {
+            loading.render({
+                el: "#loading-" + i,
+                 type: i
+            });
+         }
+    }
     $('.loading-body .layui-btn').on('click', function () {
         var othis = $(this), method = othis.data('method');
         active[method] ? active[method].call(this, othis) : '';
     });
 
 });
-
     </pre>
 
 
@@ -176,12 +178,7 @@ layui.config({
             el: "#loading-0"
         });
 
-        for (var i = 1; i < 12; i++) {
-            loading.render({
-                el: "#loading-" + i,
-                type: i
-            });
-        }
+        restLoading();
 
         var active = {
             close: function () {
@@ -190,16 +187,25 @@ layui.config({
             , closeAll: function () {
                 loading.close();
             }
-            , show: function () {
-                loading.render({time: 3000, className: "my-loading1"});
+            , reset: function () {
+                restLoading();
             }
         }
 
+        function restLoading(){
+            for (var i = 1; i < 12; i++) {
+                loading.render({
+                    el: "#loading-" + i,
+                     type: i
+                });
+             }
+        }
         $('.loading-body .layui-btn').on('click', function () {
             var othis = $(this), method = othis.data('method');
             active[method] ? active[method].call(this, othis) : '';
         });
 
     });
+
 </script>
 </html>
